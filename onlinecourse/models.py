@@ -124,7 +124,7 @@ class Question(models.Model):
     # Other fields and methods you would like to design
 class Choice(models.Model):
     question_id = models.ForeignKey(Question, on_delete=models.CASCADE)
-    choise_text = models.CharField(max_length=200, default="Choise")
+    choice_text = models.CharField(max_length=200, default="Choice")
     is_correct = models.BooleanField(default=0)
 
 # <HINT> The submission model
@@ -132,6 +132,12 @@ class Choice(models.Model):
 # One submission could have multiple choices
 # One choice could belong to multiple submissions
 class Submission(models.Model):
-   enrollment = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
-   chocies = models.ManyToManyField(Choice)
+    enrollment_id = models.ForeignKey(Enrollment, on_delete=models.CASCADE)
+
+
 #    Other fields and methods you would like to design
+
+class SubmissionChoice(models.Model):
+    submission_id = models.ForeignKey(Submission, on_delete=models.CASCADE)
+    choice_id = models.ForeignKey(Choice, on_delete=models.CASCADE)
+

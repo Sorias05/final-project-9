@@ -113,9 +113,9 @@ def enroll(request, course_id):
 def submit(request, course_id):
     course = get_object_or_404(Course, pk=course_id)
     user = request.user
-    enrollment = Enrollment.objects.get(user=user, course=course)
+    enrollment_id = Enrollment.objects.get(user=user, course=course)
     choices = request.POST['choices']
-    Submission.objects.create(enrollment=enrollment, chocies=chocies)
+    Submission.objects.create(enrollment_id=enrollment_id)
     # for choice in choices:
     #     Submission.objects.create(choice=choice)
         
@@ -142,11 +142,11 @@ def show_exam_result(request, course_id, submission_id):
     course = get_object_or_404(Course, pk=course_id)
     submission = get_object_or_404(Submission, pk=submission_id)
     choices = request.choices
-    Submission.objects.get(choices=choices)
+    submission = Submission.objects.get(choices=choices)
     total_score = 0
     for choice in choices:
         if choice.is_correct:
-            total_score = total_score + Question.objects.get(question)
+            total_score = total_score + 2
 
 
     
